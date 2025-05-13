@@ -42,17 +42,59 @@ int main() {
 
                 navio1 +=1;
             } 
-            // posicionar segundo navio diagonal
+            // // posicionar segundo navio diagonal
             else if (navio2 < 3 && (i + j) == 9) {
-                tabuleiro[i][j] = 3;
+                if (j != 9) {
+                    tabuleiro[i][j] = 3;
+                    navio2 +=1;
+                }
 
-                navio2 +=1;
             } 
             else {
                 tabuleiro[i][j] = 0; // mar
             }
 
         }    
+    }
+
+    // Habilidades
+    // Exemplo de saída de habilidade em cone:
+    // 0 0 3 0 0
+    // 0 3 3 3 0 
+    // 3 3 3 3 3   
+    // Exemplo de saída de habilidade em cruz:
+    // 0 0 3 0 0 
+    // 3 3 3 3 3 
+    // 0 0 3 0 0
+    // Exemplo de saída de habilidade em octaedro:
+    // 0 0 3 0 0 
+    // 0 3 3 3 0 
+    // 0 0 3 0 0
+    for (int i = 0; i < LINHAS; i++)
+    {
+        for (int j = 0; j < COLUNAS; j++)
+        {
+            // Cone
+            if ((i == 0 && j == 3) // 0 0 5 0 0
+                || (i == 1 && (j == 2 || j == 3 || j == 4)) // 0 5 5 5 0
+                || (i == 2 && (j == 1 || j == 2 || j == 3 || j == 4 || j == 5))) { // 5 5 5 5 5
+                tabuleiro[i][j] = 5;
+            } 
+
+            // cruz
+            if ((i == 4 && j == 7) // 0 0 5 0 0
+                || (i == 5 && (j == 5 || j == 6 || j == 7 || j == 8 || j == 9)) // 5 5 5 5 5
+                || (i == 6 && (j == 7))) { // 0 0 5 0 0
+                tabuleiro[i][j] = 5;
+            }
+
+            // octaedro
+            if ((i == 7 && j == 3) // 0 0 5 0 0
+                || (i == 8 && (j == 2 || j == 3 || j == 4)) // 0 5 5 5 0
+                || (i == 9 && (j == 3))) { // 0 0 5 0 0
+                tabuleiro[i][j] = 5;
+            }
+        }
     }
     
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
