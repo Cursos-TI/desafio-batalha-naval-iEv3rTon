@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+#define LINHAS 10
+#define COLUNAS 10
+
 // Desafio Batalha Naval - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
@@ -17,16 +20,33 @@ int main() {
      * 0: Mar
      * 3: Navio
     */
-    for (int i = 0; i < 10; i++)
+    // limitar tamhanho dos navios
+    int navio1 = 0;
+    int navio2 = 0;
+
+    for (int i = 0; i < LINHAS; i++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < COLUNAS; j++)
         {
-            // posicionar primeiro navil horizontal
-            if ((i == 1 || i == 2 || i == 3) && j == 1 ) {
+            // posicionar primeiro navio vertical
+            if ((i == 1 || i == 2 || i == 3) && j == 5 ) {
                 tabuleiro[i][j] = 3;
             } 
-            else if ((j == 6 || j == 7 || j == 5) && i == 6 ) { // posicionar segundo navil vertical
+            // posicionar segundo navil horizontal
+            else if ((j == 2 || j == 3 || j == 4) && i == 8 ) {
                 tabuleiro[i][j] = 3;
+            } 
+            // posicionar primeiro navio diagonal
+            else if (navio1 < 3 && i > 1 && i == j) {
+                tabuleiro[i][j] = 3;
+
+                navio1 +=1;
+            } 
+            // posicionar segundo navio diagonal
+            else if (navio2 < 3 && (i + j) == 9) {
+                tabuleiro[i][j] = 3;
+
+                navio2 +=1;
             } 
             else {
                 tabuleiro[i][j] = 0; // mar
@@ -52,16 +72,16 @@ int main() {
 
     
     // imprimir as posiçoes horizontal e vertical
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < LINHAS; i++)
     {
         // Espaçamento para alinhar o numero 10
         if (i != 9) {
             printf(" ");
         }
         printf(" %d: %d ", i+1, tabuleiro[0][i]);
-        for (int j = 0; j < 9; j++)
+        for (int j = 1; j < COLUNAS; j++)
         {
-            printf("%d ", tabuleiro[j][i]);
+            printf("%d ", tabuleiro[i][j]);
 
         }
 
